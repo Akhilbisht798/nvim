@@ -152,11 +152,11 @@ require('lazy').setup({
 
   {
     -- Theme inspired by Atom
-    'morhetz/gruvbox',
+    'rose-pine/neovim',
 
-    priority = 1001,
+    priority = 1002,
     config = function()
-      vim.cmd.colorscheme 'gruvbox'
+      vim.cmd.colorscheme 'rose-pine'
     end,
   },
 
@@ -166,8 +166,8 @@ require('lazy').setup({
     -- See `:help lualine.txt`
     opts = {
       options = {
-        icons_enabled = false,
-        theme = 'onedark',
+        icons_enabled = true,
+        theme = 'rose-pine',
         component_separators = '|',
         section_separators = '',
       },
@@ -256,6 +256,11 @@ vim.o.breakindent = true
 -- Save undo history
 vim.o.undofile = true
 
+-- Relative number
+vim.o.relativenumber = true
+vim.o.numberwidth = 4
+vim.cmd [[set guicursor=n-v-c:block-Cursor/lCursor]]
+
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -330,10 +335,17 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 
 -- harpoon Keymaps
-vim.keymap.set('n', '<leader>ha', require("harpoon.mark").add_file, { desc = 'Harpoon [H]arpoon [A]dd' })
-vim.keymap.set('n', '<leader>hs', require("harpoon.ui").toggle_quick_menu, { desc = 'Harpoon [H]arpoon [S]how' })
-vim.keymap.set('n', '<leader>hn', require("harpoon.ui").nav_next, { desc = 'Harpoon [H]arpoon [N]ext' })
-vim.keymap.set('n', '<leader>hp', require("harpoon.ui").nav_prev, { desc = 'Harpoon [H]arpoon [P]revious' })
+vim.keymap.set('n', '<C-p>', require("harpoon.mark").add_file, { desc = 'Harpoon [H]arpoon [A]dd' })
+vim.keymap.set('n', '<C-u>', require("harpoon.ui").toggle_quick_menu, { desc = 'Harpoon [H]arpoon [S]how' })
+vim.keymap.set("n", "<C-h>", function() require("harpoon.ui").nav_file(1) end, { desc = 'Harpoon [H]arpoon [S]how' })
+vim.keymap.set("n", "<C-t>", function() require("harpoon.ui").nav_file(2) end, { desc = 'Harpoon [H]arpoon [S]how' })
+vim.keymap.set("n", "<C-n>", function() require("harpoon.ui").nav_file(3) end, { desc = 'Harpoon [H]arpoon [S]how' })
+vim.keymap.set("n", "<C-e>", function() require("harpoon.ui").nav_file(4) end, { desc = 'Harpoon [H]arpoon [S]how' })
+--local mark = require("harpoon.mark")
+--local ui = require("harpoon.ui")
+--vim.keymap.set("n", "<leader>a", mark.add_file)
+--vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+
 
 -- Oil Keymaps
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
@@ -348,7 +360,7 @@ vim.defer_fn(function()
       'bash' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-    auto_install = false,
+    auto_install = true,
 
     highlight = { enable = true },
     indent = { enable = true },
@@ -484,12 +496,12 @@ require('mason-lspconfig').setup()
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  clangd = {},
+  gopls = {},
+  pyright = {},
+  rust_analyzer = {},
+  tsserver = {},
+  html = { filetypes = { 'html', 'twig', 'hbs' } },
 
   lua_ls = {
     Lua = {
