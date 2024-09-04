@@ -109,8 +109,10 @@ require('lazy').setup({
     },
   },
 
+  { 'folke/todo-comments.nvim', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim',     opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -151,12 +153,15 @@ require('lazy').setup({
   },
 
   {
-    -- Theme inspired by Atom
-    'rose-pine/neovim',
+    --'rose-pine/neovim',
+    --'EdenEast/nightfox.nvim',
+    'folke/tokyonight.nvim',
+    --'olimorris/onedarkpro.nvim',
+    --'ellisonleao/gruvbox.nvim',
 
     priority = 1002,
     config = function()
-      vim.cmd.colorscheme 'rose-pine'
+      vim.cmd.colorscheme 'tokyonight'
     end,
   },
 
@@ -167,7 +172,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = true,
-        theme = 'rose-pine',
+        theme = 'tokyonight',
         component_separators = '|',
         section_separators = '',
       },
@@ -184,7 +189,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',  opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -207,6 +212,7 @@ require('lazy').setup({
     },
   },
 
+  { 'tribela/vim-transparent' },
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -245,6 +251,10 @@ vim.wo.number = true
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
+-- ruler
+--#vim.opt.colorcolumn = "80"
+--#vim.cmd [[highlight ColorColumn ctermbg=0 guibg=LightGray]]
+
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
@@ -255,6 +265,7 @@ vim.o.breakindent = true
 
 -- Save undo history
 vim.o.undofile = true
+vim.o.scrolloff = 15
 
 -- Relative number
 vim.o.relativenumber = true
@@ -486,6 +497,8 @@ require('which-key').register {
 -- before setting up the servers.
 require('mason').setup()
 require('mason-lspconfig').setup()
+
+
 
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
