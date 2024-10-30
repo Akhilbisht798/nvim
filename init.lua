@@ -43,6 +43,10 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.opt.tabstop = 2      -- Set tab character width to 2 spaces
+vim.opt.shiftwidth = 2   -- Set indentation width to 2 spaces
+vim.opt.expandtab = true -- Convert tabs to spaces
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -155,13 +159,14 @@ require('lazy').setup({
   {
     --'rose-pine/neovim',
     --'EdenEast/nightfox.nvim',
-    'folke/tokyonight.nvim',
+    --'folke/tokyonight.nvim',
+    'EdenEast/nightfox.nvim',
     --'olimorris/onedarkpro.nvim',
     --'ellisonleao/gruvbox.nvim',
 
     priority = 1002,
     config = function()
-      vim.cmd.colorscheme 'tokyonight'
+      vim.cmd.colorscheme 'nightfox'
     end,
   },
 
@@ -172,7 +177,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = true,
-        theme = 'tokyonight',
+        theme = 'nightfox',
         component_separators = '|',
         section_separators = '',
       },
